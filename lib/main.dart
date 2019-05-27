@@ -21,31 +21,41 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: PageRowColumn(),
+      home: PageList(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class PageRowColumn extends StatelessWidget {
+class PageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: new Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: new ListView(
         children: <Widget>[
-          new Text('------'),
-          new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Text('00'),
-              new Text('000'),
-              new Text('0000'),
-            ],
+          new ListTile(
+            title: Text('Rendang'),
+            trailing: Icon(Icons.add_to_queue),
           ),
-          new Text('======')
+          new ListTile(
+            title: Text('Sambel'),
+            trailing: Icon(Icons.pages),
+          ),
+          new ListTile(
+            title: Text('Minuman'),
+            trailing: Icon(Icons.local_drink),
+          ),
+          new ListTile(
+            title: Text('Makanan'),
+            trailing: Icon(Icons.fastfood),
+          ),
+          new ListTile(
+            title: Text('Dan lainnya'),
+            trailing: Icon(Icons.drive_eta),
+          )
         ],
       ),
     );
   }
 }
+
