@@ -21,67 +21,30 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: PageUtama(),
+      home: PageRowColumn(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class PageUtama extends StatelessWidget {
+class PageRowColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: new Center(
-      child: Column(children: <Widget>[
-        new MaterialButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => PagePertama()));
-          },
-          child: Text('Page Pertama'),
-          color: Colors.lightBlue,
-          textColor: Colors.white,
-        ),
-        new MaterialButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => PageKedua()));
-          },
-          child: Text('Page Kedua'),
-          color: Colors.lightGreen,
-          textColor: Colors.white,
-        ),
-        new MaterialButton(
-          onPressed: () {     Navigator.push(context,
-              MaterialPageRoute(builder: (context) => PageKetiga()));},
-          child: Text('Page Ketiga'),
-          color: Colors.lime,
-          textColor: Colors.white,
-        )
-      ]),
-    ));
-  }
-}
-
-class PagePertama extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      body: new Center(
-        child: Text('Page Pertama'),
-      ),
-    );
-  }
-}
-
-class PageKedua extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      body: new Center(
-        child: Text('Page Kedua'),
+      body: new Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Text('------'),
+          new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Text('00'),
+              new Text('000'),
+              new Text('0000'),
+            ],
+          ),
+          new Text('======')
+        ],
       ),
     );
   }
