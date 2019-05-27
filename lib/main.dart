@@ -21,41 +21,41 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: PageList(),
+      home: PageListWidget(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class PageList extends StatelessWidget {
+class PageListWidget extends StatefulWidget {
+  @override
+  _PageListWidgetState createState() => _PageListWidgetState();
+}
+
+class _PageListWidgetState extends State<PageListWidget> {
+  List<int> item = new List();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    for (int i = 0; i < 25; i++) {
+      item.add(i);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: new ListView(
-        children: <Widget>[
-          new ListTile(
-            title: Text('Rendang'),
-            trailing: Icon(Icons.add_to_queue),
-          ),
-          new ListTile(
-            title: Text('Sambel'),
-            trailing: Icon(Icons.pages),
-          ),
-          new ListTile(
-            title: Text('Minuman'),
-            trailing: Icon(Icons.local_drink),
-          ),
-          new ListTile(
-            title: Text('Makanan'),
-            trailing: Icon(Icons.fastfood),
-          ),
-          new ListTile(
-            title: Text('Dan lainnya'),
-            trailing: Icon(Icons.drive_eta),
-          )
-        ],
-      ),
+      body: new ListView.builder(
+          itemCount: item.length,
+          itemBuilder: (BuildContext context, int index) {
+            return new ListTile(
+              title: new Text('Item no : $index'),
+              trailing: new Icon(Icons.print),
+            );
+          }),
     );
   }
 }
-
