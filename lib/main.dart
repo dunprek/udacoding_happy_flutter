@@ -52,7 +52,12 @@ class _PageGridViewState extends State<PageGridView> {
         backgroundColor: Colors.yellow,
         titleSpacing: 80.0,
         elevation: 35.0,
-        toolbarOpacity: 0.5,
+//        toolbarOpacity: 0.5,
+      actions: <Widget>[
+        new IconButton(icon: Icon(Icons.menu), onPressed: (){}),
+        new IconButton(icon: Icon(Icons.data_usage), onPressed: (){})
+
+      ],
       ),
       body: GridView.builder(
           gridDelegate:
