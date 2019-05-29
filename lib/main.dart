@@ -21,55 +21,41 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: PageTabBar(),
+      home: PageInputWidget(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class PageTabBar extends StatefulWidget {
+class PageInputWidget extends StatefulWidget {
   @override
-  _PageTabBarState createState() => _PageTabBarState();
+  _PageInputWidgetState createState() => _PageInputWidgetState();
 }
 
-class _PageTabBarState extends State<PageTabBar>
-    with SingleTickerProviderStateMixin {
-  TabController tabController;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    tabController = new TabController(length: 4, vsync: this);
-  }
+class _PageInputWidgetState extends State<PageInputWidget> {
+  String txt = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tab Bar app'),
         backgroundColor: Colors.green,
-        bottom: new TabBar(controller: tabController, tabs: <Widget>[
-          new Tab(icon: new Icon(Icons.home),),
-          new Tab(icon: new Icon(Icons.data_usage),),
-          new Tab(icon: new Icon(Icons.dashboard),),
-          new Tab(icon: new Icon(Icons.close),),
-        ]),
+        title: new Text('Page Input Widget'),
       ),
-      body: new TabBarView(controller: tabController, children: <Widget>[
-        new Center(
-          child: new Text("welcome to home"),
-        ),
-        new Center(
-          child: new Text("welcome to datausage"),
-        ),
-        new Center(
-          child: new Text("welcome to dashboard"),
-        ),
-        new Center(
-          child: new Text("welcome to close"),
-        ),
-      ]),
+      body: new Column(
+        children: <Widget>[
+          new TextField(
+            onChanged: (String text) {
+              setState(() {
+                txt = text;
+              });
+            },
+            decoration: new InputDecoration(
+                hintText: 'Input username', labelText: 'username'),
+          ),
+          new Text(txt)
+        ],
+      ),
     );
   }
 }
