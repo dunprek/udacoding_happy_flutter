@@ -21,36 +21,47 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: PageButton(),
+      home: PageSliderWidget(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class PageButton extends StatelessWidget {
+class PageSliderWidget extends StatefulWidget {
+  @override
+  _PageSliderWidgetState createState() => _PageSliderWidgetState();
+}
+
+class _PageSliderWidgetState extends State<PageSliderWidget> {
+  double drag = 1.0;
+
+  void methodDragVolume(value) {
+    setState(() {
+      drag = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Button'),
+        backgroundColor: Colors.green,
+        title: new Text('Drag Slider'),
       ),
-      body: new Column(
-        children: <Widget>[
-          new RaisedButton(
-            onPressed: () {},
-            child: Text('button raised'),
-          ),
-          new FlatButton(
-            onPressed: () {},
-            child: Text('button FLAT'),
-          ),
-          new MaterialButton(
-            onPressed: () {},
-            child: Text('button MATERIAL'),
-            color: Colors.green,
-            textColor: Colors.white,
-          )
-        ],
+      body: new Center(
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new Slider(
+                value: drag,
+                min: 1.0,
+                max: 10.0,
+                onChanged: (double val) {
+                  methodDragVolume(val);
+                }),
+            new Text('value : $drag')
+          ],
+        ),
       ),
     );
   }
