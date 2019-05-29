@@ -21,46 +21,60 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: PageSliderWidget(),
+      home: PageAlertWidget(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class PageSliderWidget extends StatefulWidget {
+class PageAlertWidget extends StatefulWidget {
   @override
-  _PageSliderWidgetState createState() => _PageSliderWidgetState();
+  _PageAlertWidgetState createState() => _PageAlertWidgetState();
 }
 
-class _PageSliderWidgetState extends State<PageSliderWidget> {
-  double drag = 1.0;
+class _PageAlertWidgetState extends State<PageAlertWidget> {
+  SimpleDialog simpleDialog;
 
-  void methodDragVolume(value) {
-    setState(() {
-      drag = value;
-    });
+  void showSimpleDialog() {
+    simpleDialog = new SimpleDialog(
+      title: new Text('Warning'),
+      children: <Widget>[
+        new SimpleDialogOption(
+          child: Text('Jakarta'),
+          onPressed: () {
+            print("jkt");
+          },
+        ),
+        new SimpleDialogOption(
+          child: Text('Padang'),
+          onPressed: () {
+            print("pdg");
+          },
+        ),
+        new SimpleDialogOption(
+          child: Text('Close'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        )
+      ],
+    );
+    showDialog(context: context,child: simpleDialog);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: new Text('Notification Widget'),
         backgroundColor: Colors.green,
-        title: new Text('Drag Slider'),
       ),
       body: new Center(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Slider(
-                value: drag,
-                min: 1.0,
-                max: 10.0,
-                onChanged: (double val) {
-                  methodDragVolume(val);
-                }),
-            new Text('value : $drag')
-          ],
+        child: RaisedButton(
+          onPressed: () {
+            showSimpleDialog();
+          },
+          child: new Text('Show Alert Dialog'),
         ),
       ),
     );
