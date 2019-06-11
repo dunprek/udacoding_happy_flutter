@@ -19,21 +19,27 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blue,                                                              
       ),
-      home: PageAlertWidget(),
+      home: PageAlertDialog(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class PageAlertWidget extends StatefulWidget {
+class PageAlertDialog extends StatefulWidget {
   @override
-  _PageAlertWidgetState createState() => _PageAlertWidgetState();
+  _PageAlertDialogState createState() => _PageAlertDialogState();
 }
 
-class _PageAlertWidgetState extends State<PageAlertWidget> {
+class _PageAlertDialogState extends State<PageAlertDialog> {
+  final GlobalKey<ScaffoldState> _key = new GlobalKey<ScaffoldState>();
   SimpleDialog simpleDialog;
+
+  void showSnackbar() {
+    _key.currentState
+        .showSnackBar(new SnackBar(content: new Text('This is Snackbar')));
+  }
 
   void showSimpleDialog() {
     simpleDialog = new SimpleDialog(
@@ -59,7 +65,29 @@ class _PageAlertWidgetState extends State<PageAlertWidget> {
         )
       ],
     );
-    showDialog(context: context,child: simpleDialog);
+    showDialog(context: context, child: simpleDialog);
+  }
+
+  void showAlertDialog() {
+    showDialog(
+        context: context,
+        child: new AlertDialog(
+          title: Text('Warning'),
+          content: Text('Anda yakin ingin keluar?'),
+          actions: <Widget>[
+            new IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
+            new IconButton(
+                icon: Icon(Icons.check),
+                color: Colors.green,
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
+          ],
+        ));
   }
 
   @override
@@ -69,12 +97,33 @@ class _PageAlertWidgetState extends State<PageAlertWidget> {
         title: new Text('Notification Widget'),
         backgroundColor: Colors.green,
       ),
+      key: _key,
       body: new Center(
-        child: RaisedButton(
-          onPressed: () {
-            showSimpleDialog();
-          },
-          child: new Text('Show Alert Dialog'),
+        child: new Column(
+          children: <Widget>[
+            new RaisedButton(
+              onPressed: () {
+                showSimpleDialog();
+              },
+              child: new Text('Show Alert Dialog'),
+            ),
+            new MaterialButton(
+              onPressed: () {
+                showAlertDialog();
+              },
+              child: Text('Alert Dialog'),
+              color: Colors.blue,
+              textColor: Colors.white,
+            ),
+            new MaterialButton(
+              onPressed: () {
+                showSnackbar();
+              },
+              child: Text('Show Snackbar'),
+              color: Colors.orange,
+              textColor: Colors.white,
+            )
+          ],
         ),
       ),
     );
