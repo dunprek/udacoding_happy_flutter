@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'page_ketiga.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,                                                              
+        primarySwatch: Colors.blue,
       ),
       home: PageAlertDialog(),
       debugShowCheckedModeBanner: false,
@@ -121,6 +122,20 @@ class _PageAlertDialogState extends State<PageAlertDialog> {
               },
               child: Text('Show Snackbar'),
               color: Colors.orange,
+              textColor: Colors.white,
+            ),
+            new MaterialButton(
+              onPressed: () {
+                Fluttertoast.showToast(
+                  msg: "Ini Toast",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  backgroundColor: Colors.green,
+                  textColor: Colors.white
+                );
+              },
+              child: Text('Show Toast'),
+              color: Colors.purple,
               textColor: Colors.white,
             )
           ],
