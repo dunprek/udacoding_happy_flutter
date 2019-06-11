@@ -27,22 +27,45 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class PageImageAsset extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image pada asset'),
+        title: Text('Image pada URL'),
         backgroundColor: Colors.green,
       ),
-
       body: Column(
         children: <Widget>[
-          Image.asset('gambar/13301518.jpeg'),
-          Text('Tayo')
+//          Image.asset('gambar/13301518.jpeg'),
+          Text('Tayo'),
+          SizedBox(
+            height: 50,
+            width: 50,
+          ),
+          Text(
+            'image from url',
+            style: TextStyle(
+                fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.red),
+          ),
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Image.network(
+                'https://deskqoe.id/static/img/pop_up_SQ-01.6aee2b1.jpg',
+                height: 150,
+                width: 150,
+              ),
+              Image.network(
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1QRc9eaCANp6v5-bdmdOqZ5acC-KyzMw7w0lBXAUkktAH4AVTvA',
+                height: 150,
+                width: 150,
+              ),
+            ],
+          )
         ],
       ),
     );
   }
 }
-
